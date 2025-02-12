@@ -36,8 +36,7 @@
 proc checkRequiredFiles { origin_dir} {
   set status true
   set files [list \
- "[file normalize "$origin_dir/../../../../Final_bin_img/Final_bin_img.srcs/sources_1/new/axi_bin_comp.vhd"]"\
- "[file normalize "$origin_dir/../../../../Final_bin_img/Final_bin_img.srcs/sources_1/bd/design_1/design_1.bd"]"\
+ "[file normalize "$origin_dir/src/hdl/axi_bin_comp.vhd"]"\
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -113,7 +112,7 @@ if { $::argc > 0 } {
 }
 
 # Set the directory path for the original project from where this script was exported
-set orig_proj_dir "[file normalize "$origin_dir/../../../../Final_bin_img"]"
+set orig_proj_dir "[file normalize "$origin_dir"]"
 
 # Check for paths and files needed for project creation
 set validate_required 0
@@ -162,8 +161,7 @@ if {[string equal [get_filesets -quiet sources_1] ""]} {
 set obj [get_filesets sources_1]
 # Add local files from the original project (-no_copy_sources specified)
 set files [list \
- [file normalize "${origin_dir}/../../../../Final_bin_img/Final_bin_img.srcs/sources_1/new/axi_bin_comp.vhd" ]\
- [file normalize "${origin_dir}/../../../../Final_bin_img/Final_bin_img.srcs/sources_1/bd/design_1/design_1.bd" ]\
+ [file normalize "${origin_dir}/src/hdl/axi_bin_comp.vhd" ]\
 ]
 set added_files [add_files -fileset sources_1 $files]
 
