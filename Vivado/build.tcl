@@ -152,6 +152,13 @@ set_property -name "simulator_language" -value "Mixed" -objects $obj
 set_property -name "sim_compile_state" -value "1" -objects $obj
 set_property -name "target_language" -value "VHDL" -objects $obj
 
+# Create block design
+ source $origin_dir/src/bd/design_1.tcl
+
+ # Generate the wrapper
+ set design_name [get_bd_designs]
+ make_wrapper -files [get_files $design_name.bd] -top -import
+
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
   create_fileset -srcset sources_1
@@ -170,7 +177,7 @@ set added_files [add_files -fileset sources_1 $files]
 # None
 
 # Set 'sources_1' fileset file properties for local files
-set file "new/axi_bin_comp.vhd"
+set file "src/hdl/axi_bin_comp.vhd"
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 
@@ -529,10 +536,3 @@ move_dashboard_gadget -name {drc_1} -row 2 -col 0
 move_dashboard_gadget -name {timing_1} -row 0 -col 1
 move_dashboard_gadget -name {utilization_2} -row 1 -col 1
 move_dashboard_gadget -name {methodology_1} -row 2 -col 1
-
-# Create block design
- source $origin_dir/src/bd/design_1.tcl
-
- # Generate the wrapper
- set design_name [get_bd_designs]
- make_wrapper -files [get_files $design_name.bd] -top -import
