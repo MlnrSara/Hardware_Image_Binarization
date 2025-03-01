@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity axis_bin_comp is
+entity axi_bin_comp is
     generic (
         ADDR_WIDTH : integer := 12;
         C_AXIS_TDATA_WIDTH : integer := 32
@@ -26,9 +26,9 @@ entity axis_bin_comp is
         m00_axis_tready : in std_logic;
         m00_axis_tlast : out std_logic
     );
-end axis_bin_comp;
+end axi_bin_comp;
 
- architecture Behavioral of axis_bin_comp is
+ architecture Behavioral of axi_bin_comp is
 
     signal wr_ptr_reg, wr_ptr_next : unsigned(ADDR_WIDTH downto 0) := (others => '0');
     signal wr_ptr_gray_reg, wr_ptr_gray_next : unsigned(ADDR_WIDTH downto 0) := (others => '0');
